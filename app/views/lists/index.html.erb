@@ -1,7 +1,25 @@
-<h1>My Movie Lists</h1>
-<ul>
-  <% @lists.each do |list| %>
-    <li><%= list.name %></li>
-  <% end %>
-</ul>
-<%= link_to "Create a new list", new_list_path %>
+<div class="banner mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop')">
+  <div class="container text-center">
+    <h1>Save any kind of movies</h1>
+    <p>Drama, Action, Sci-Fi... you name it!</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">My Lists</h2>
+    <%= link_to "Create a new list", new_list_path, class: "btn btn-flat" %>
+  </div>
+
+  <div class="row">
+    <% @lists.each do |list| %>
+      <div class="col-12 col-md-4 mb-4">
+        <%= link_to list_path(list), class: "text-decoration-none" do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop')">
+            <%= list.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

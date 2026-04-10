@@ -14,3 +14,17 @@
 @import "components/navbar";
 @import "components/banner";
 @import "components/card_category";
+@import "components/button";
+@import "components/card_product";
+
+
+body {
+  font-family: $body-font;
+  font-weight: 400; // Standardgewichtung
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font;
+  font-weight: 700; // Fett für Überschriften
+}

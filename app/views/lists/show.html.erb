@@ -1,2 +1,42 @@
-<h1><%= @list.name %></h1>
-<%= link_to "Back to lists", lists_path %>
+<div class="banner mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=2070&auto=format&fit=crop')">
+  <div class="container text-center">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">Movies in this list</h3>
+    <div>
+      <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-flat" %>
+      <%= link_to "Delete list", list_path(@list), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger ms-2" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <% if @list.bookmarks.empty? %>
+      <div class="col-12 text-center text-muted py-5">
+        <p>No movies added yet. Click "Add a movie" to get started!</p>
+      </div>
+    <% end %>
+
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="col-12 col-lg-6 mb-3">
+        <div class="card-product">
+          <img src="<%= bookmark.movie.poster_url %>" alt="<%= bookmark.movie.title %>" />
+          <div class="card-product-infos">
+            <div class="d-flex justify-content-between">
+              <h2><%= bookmark.movie.title %></h2>
+              <span class="badge bg-secondary"><%= bookmark.movie.rating %> <i class="fas fa-star text-warning"></i></span>
+            </div>
+            <p class="text-truncate" style="max-width: 300px;"><%= bookmark.movie.overview %></p>
+            <div class="mt-2 d-flex justify-content-between align-items-center">
+              <small class="text-muted italic"><i class="fas fa-quote-left"></i> <%= bookmark.comment %></small>
+              <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Remove #{bookmark.movie.title}?" }, class: "text-danger text-decoration-none small" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

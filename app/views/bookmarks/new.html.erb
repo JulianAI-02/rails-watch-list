@@ -1,0 +1,17 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+      <div class="bg-white shadow p-5 rounded">
+        <h2 class="fw-bold mb-4">Add a movie to <%= @list.name %></h2>
+
+        <%= simple_form_for([@list, @bookmark]) do |f| %>
+          <%= f.association :movie, collection: Movie.all.order(:title), prompt: "Select a movie", input_html: { class: "select2" } %>
+          <%= f.input :comment, placeholder: "Why do you want to add this movie?" %>
+          <%= f.submit "Add movie", class: "btn btn-flat w-100 mt-3" %>
+        <% end %>
+
+        <%= link_to "Cancel", list_path(@list), class: "text-muted small d-block mt-3 text-decoration-none" %>
+      </div>
+    </div>
+  </div>
+</div>
